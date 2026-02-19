@@ -22,6 +22,8 @@ build:
         export CFLAGS="${CFLAGS} -D_DARWIN_C_SOURCE"
     - if: unix
       then: |
+        cp -f ${BUILD_PREFIX}/bin/glib-mkenums ${PREFIX}/bin/glib-mkenums
+        cp -f ${BUILD_PREFIX}/bin/glib-genmarshal ${PREFIX}/bin/glib-genmarshal
         meson setup ${MESON_ARGS} \
             --prefix=$PREFIX \
             --default-library=shared \
