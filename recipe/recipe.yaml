@@ -48,6 +48,7 @@ requirements:
     - meson
     - ninja
     - pkg-config
+    - glib
   host:
     - expat
     - freetype
