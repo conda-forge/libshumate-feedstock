@@ -24,9 +24,11 @@ build:
       then: |
         cp -f ${BUILD_PREFIX}/bin/glib-mkenums ${PREFIX}/bin/glib-mkenums
         cp -f ${BUILD_PREFIX}/bin/glib-genmarshal ${PREFIX}/bin/glib-genmarshal
-        echo "#!/bin/bash" > ${PREFIX}/bin/glib-compile-resources
-        echo "exec ${BUILD_PREFIX}/bin/glib-compile-resources \"\$@\"" >> ${PREFIX}/bin/glib-compile-resources
-        chmod +x ${PREFIX}/bin/glib-compile-resources
+        for tool in glib-compile-resources gperf; do
+          echo "#!/bin/bash" > ${PREFIX}/bin/${tool}
+          echo "exec ${BUILD_PREFIX}/bin/${tool} \"\$@\"" >> ${PREFIX}/bin/${tool}
+          chmod +x ${PREFIX}/bin/${tool}
+        done
         meson setup ${MESON_ARGS} \
             --prefix=$PREFIX \
             --default-library=shared \
@@ -52,11 +54,11 @@ requirements:
     - ninja
     - pkg-config
     - glib
+    - gperf
   host:
     - expat
     - freetype
     - glib
-    - gperf
     - gtk4
     - json-glib
     - libsoup
