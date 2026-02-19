@@ -12,7 +12,7 @@ source:
   sha256: 35f013b25391856e1b5c3d4409a5c4a640c6ccb5f5296ff982ec7bed39f56d4c
 
 build:
-  number: 0
+  number: 1
   skip:
     - win
   script:
@@ -48,6 +48,7 @@ requirements:
     - pkg-config
   host:
     - expat
+    - freetype
     - glib
     - gperf
     - gtk4
@@ -65,6 +66,7 @@ requirements:
       - libexpat
       - adwaita-icon-theme
       - libzlib
+      - libfreetype6
 
 tests:
   - package_contents:
