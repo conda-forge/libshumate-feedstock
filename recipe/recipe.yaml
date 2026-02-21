@@ -55,6 +55,7 @@ requirements:
     - pkg-config
     - glib
     - gperf
+    - gettext
   host:
     - expat
     - freetype
