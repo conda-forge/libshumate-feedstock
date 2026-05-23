@@ -12,23 +12,12 @@ source:
   sha256: b36aad34500791785f546684d0f2ed644e4819ff4e85ae67a2245f159eccb2d4
 
 build:
-  number: 0
+  number: 1
   skip:
     - win
   script:
-    - if: osx
-      then: |
-        # Define _DARWIN_C_SOURCE to expose POSIX.1-2008 functions like strnlen
-        export CFLAGS="${CFLAGS} -D_DARWIN_C_SOURCE"
     - if: unix
       then: |
-        cp -f ${BUILD_PREFIX}/bin/glib-mkenums ${PREFIX}/bin/glib-mkenums
-        cp -f ${BUILD_PREFIX}/bin/glib-genmarshal ${PREFIX}/bin/glib-genmarshal
-        for tool in glib-compile-resources gperf; do
-          echo "#!/bin/bash" > ${PREFIX}/bin/${tool}
-          echo "exec ${BUILD_PREFIX}/bin/${tool} \"\$@\"" >> ${PREFIX}/bin/${tool}
-          chmod +x ${PREFIX}/bin/${tool}
-        done
         meson setup ${MESON_ARGS} \
             --prefix=$PREFIX \
             --default-library=shared \
@@ -36,7 +25,6 @@ build:
             -Dgtk_doc=false \
             -Dvapi=false \
             -Ddemos=false \
-            -Dgir=false \
             builddir
         ninja -v -C builddir -j ${CPU_COUNT}
         ninja -C builddir install -j ${CPU_COUNT}
@@ -63,8 +51,8 @@ requirements:
     - gtk4
     - json-glib
     - libsoup
-    - protobuf-c
     - libsqlite
+    - protobuf-c
     - zlib
   run:
     - protobuf-c
