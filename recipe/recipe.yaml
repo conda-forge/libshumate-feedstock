@@ -1,6 +1,6 @@
 context:
   name: libshumate
-  version: "1.7.0"
+  version: "1.7.1"
   version_majmin: ${{ (version | split('.'))[:2] | join('.') }}
 
 package:
@@ -9,7 +9,7 @@ package:
 
 source:
   url: "https://download.gnome.org/sources/${{ name }}/${{ version_majmin }}/${{ name }}-${{ version }}.tar.xz"
-  sha256: 3896cc4b6a7bf83141c27df23ce48cdd68467603bc6b764960307cdcbbef80e5
+  sha256: 5316878f7d6a2124d8d53bdd3a34b3656f1c2337b2082aa59ed667969c0bd8f4
 
 build:
   number: 0
